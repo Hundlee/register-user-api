@@ -3,9 +3,21 @@ import { CreateUserService } from "../_services/CreateUserService";
 
 class CreateUserController {
     async handle(request: FastifyRequest, reply: FastifyReply) {
+        const { name, email, age, description } = request.body as {
+            name: string;
+            email: string;
+            age: string;
+            description: string;
+        };
+
         const userService = new CreateUserService();
 
-        const user = await userService.execute();
+        const user = await userService.execute({
+            name,
+            email,
+            age,
+            description,
+        });
 
         reply.send(user);
     }
