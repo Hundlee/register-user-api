@@ -24,7 +24,7 @@ model User {
   created_at  DateTime? @default(now())
   updated_at  DateTime? @default(now())
 
-  @@map("customers")
+  @@map("user")
 }
 
 enum Gender {
