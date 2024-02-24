@@ -34,7 +34,7 @@ export async function routes(
     );
 
     fastify.delete(
-        "/users",
+        "/user",
         async (request: FastifyRequest, reply: FastifyReply) => {
             return new DeleteUserController().handle(request, reply);
         }
