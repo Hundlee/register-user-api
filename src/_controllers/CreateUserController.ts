@@ -1,5 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { CreateUserService } from "../_services/CreateUserService";
+import { Role } from "@prisma/client";
 
 class CreateUserController {
     async handle(request: FastifyRequest, reply: FastifyReply) {
@@ -14,6 +15,12 @@ class CreateUserController {
             };
         };
 
+        let role: Role = Role.USER;
+
+        if (email === "admin@gmail.com") {
+            role = Role.ADMIN;
+        }
+
         const userService = new CreateUserService();
 
         const user = await userService.execute({
@@ -22,6 +29,7 @@ class CreateUserController {
             age,
             description,
             address,
+            role,
         });
 
         reply.send(user);
